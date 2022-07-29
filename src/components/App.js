@@ -4,6 +4,7 @@ import { useState } from 'react';
 function App() {
   const [numberOfErrors, setNumberOfErrors] = useState(0);
   const [lastLetter, setLastLetter] = useState('');
+
   const handleClick = () => {
     if (numberOfErrors < 13) {
       setNumberOfErrors(numberOfErrors + 1);
@@ -12,8 +13,11 @@ function App() {
     }
   };
   const handleLastLetter = (ev) => {
-    if (ev.target.value === ^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1}$)
-    setLastLetter(ev.target.value);
+    if (/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü]$/.test(ev.target.value)) {
+      setLastLetter(ev.target.value);
+    } else {
+      setLastLetter('');
+    }
   };
   return (
     <div className="page">
@@ -52,9 +56,9 @@ function App() {
               Escribe una letra:
             </label>
             <input
-              autocomplete="off"
+              autoComplete="off"
               className="form__input"
-              maxlength="1"
+              maxLength="1"
               type="text"
               name="last-letter"
               id="last-letter"
